@@ -8,8 +8,6 @@ var app = module.exports = Express.createServer();
 
 // Configuration
 app.configure(function () {
-    app.set('views', __dirname + '/views');
-    app.set('view engine', 'jade');
     app.use(Express.bodyParser());
     app.use(Express.methodOverride());
     app.use(app.router);
@@ -22,13 +20,6 @@ app.configure('development', function () {
 
 app.configure('production', function () {
     app.use(Express.errorHandler()); 
-  });
-
-// Routes
-app.get('/', function (req, res) {
-    res.render('index', {
-        title: 'Bunghole'
-      });
   });
 
 // Only listen on $ node app.js
