@@ -6,3 +6,13 @@ body {
 a {
   color: #00B7FF;
 }
+
+#container {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -webkit-box-shadow: 0 1px 3px #666;
+    margin: 0 auto;
+    width: 640px;
+    height: 480px;
+}
+
