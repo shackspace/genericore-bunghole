@@ -70,7 +70,20 @@ webSocketServer.on('connection', function (connection) {
           log.error('Couldn\'t parse or eval message: ' + err.stack);
         }
       });
+
   });
+
+var plot = [];
+var count = 0;
+
+(function broadcast() {
+    count += 0.1;
+    plot.push([count, Math.sin(count)]);
+    webSocketServer.broadcast(JSON.stringify(plot));
+    setTimeout(broadcast, 200);
+  }());
+
+
 
 /* Process Logging */
 

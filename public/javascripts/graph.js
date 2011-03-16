@@ -1,15 +1,34 @@
 $(document).ready(function () {
-    var d1 = [];
 
-    var i = 0;
-
-    function update() {
-      i += 0.1;
-      d1.push([i, Math.sin(i)]);
-      $.plot($("#container"), [ d1 ]);
-      setTimeout(update, 100);
+    function log(msg) {
+      try {
+        console.log(msg);
+      } catch (e) { }
     }
-    
-    update();
 
+    function update(data) {
+      $.plot($("#container"), [ data ]);
+    }
+
+    function connect() {
+      socket = new io.Socket(window.location.hostname, { port: window.location.port });
+      socket.connect();
+
+      socket.on('message', function (data) {
+          try {
+            var msg = JSON.parse(data);
+            update(msg);
+          } catch (err) {
+            log('Error while parsing data:' + err);
+          }
+
+        });
+
+      socket.on('disconnect', function () {
+          log('Connection closed');
+          setTimeout(1000, connect);
+        });
+    }
+
+    connect();
   });
