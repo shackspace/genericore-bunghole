@@ -73,12 +73,15 @@ webSocketServer.on('connection', function (connection) {
 
   });
 
-var plot = [];
+var plotSin = [];
+var plotCos = [];
+var plot = [plotSin, plotCos];
 var count = 0;
 
 (function broadcast() {
     count += 0.1;
-    plot.push([count, Math.sin(count)]);
+    plotSin.push([count, Math.sin(count)]);
+    plotCos.push([count, Math.cos(count)]);
     webSocketServer.broadcast(JSON.stringify(plot));
     setTimeout(broadcast, 200);
   }());

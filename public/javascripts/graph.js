@@ -7,7 +7,7 @@ $(document).ready(function () {
     }
 
     function update(data) {
-      $.plot($("#container"), [ data ]);
+      $.plot($("#container"), data);
     }
 
     function connect() {
